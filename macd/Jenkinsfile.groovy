@@ -34,7 +34,7 @@ pipeline {
         stage('RUN') {
             steps {
                 script {
-                    sh("""python3 macd/runner.py -u $USERNAME -p $PASSWORD""")
+                    sh("""python3 macd/runner.py -u hello -p hello""")
                 }
             }
         }
