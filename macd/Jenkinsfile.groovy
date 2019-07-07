@@ -23,9 +23,7 @@ pipeline {
  }
             steps {
                 script {
-                    sh("""echo ${env.CREDS_USR}
-                    echo ${env.CREDS_PSW}
-                    python3 macd/runner.py""")
+                    sh("""python3 macd/runner.py""")
                 }
             }
         }
