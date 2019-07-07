@@ -24,7 +24,7 @@ pipeline {
                 script {
                     sh("""ls -la
                     python --version
-                    pip install -r requirements.txt
+                    pip install stockstats==0.2.0
                     """)
                 }
             }
