@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Username/Password') {
             environment {
-                PSQL_CREDS = credentials('psql-db')
+                PSQL_CREDS = credentials("${psql-db}")
             }
             steps {
                 sh("echo Username is $PSQL_CREDS_USR")
