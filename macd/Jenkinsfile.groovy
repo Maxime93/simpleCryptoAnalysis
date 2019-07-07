@@ -1,7 +1,10 @@
-pipeline {
+node {
     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'psql-db', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
         sh("""echo uname=$USERNAME pwd=$PASSWORD""")
     }
+}
+
+pipeline {
     agent {
         docker {
             image 'jupyter/datascience-notebook'
