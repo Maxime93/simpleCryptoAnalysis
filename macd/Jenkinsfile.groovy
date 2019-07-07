@@ -18,9 +18,9 @@ pipeline {
             }
         }
         stage('RUN') {
-            environment {
-                CREDS = credentials("${psql-db}")
-            }
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'psql-db', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+            sh("""echo uname=$USERNAME pwd=$PASSWORD""")
+ }
             steps {
                 script {
                     sh("""echo ${env.CREDS_USR}
