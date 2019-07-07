@@ -10,13 +10,12 @@ pipeline {
             args '--user root:root'
             }
     }
-    // agent any
-    stages {
-        environment {
-            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'psql-db', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-                sh("""echo uname=$USERNAME pwd=$PASSWORD""")
-            }
+    environment {
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'psql-db', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+            sh("""echo uname=$USERNAME pwd=$PASSWORD""")
         }
+    }
+    stages {
         stage('Install..') {
             steps {
                 script {
