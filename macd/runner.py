@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 import datetime
+import argparse
 import stockstats
 
 def get_filename(from_symbol, to_symbol, exchange, datetime_interval, download_date):
@@ -35,6 +36,15 @@ def filter_empty_datapoints(df):
     return df
 
 if __name__ == '__main__':
+    # Arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-u", "--username", help="PSQL Username", type=str, required=True)
+    parser.add_argument("-p", "--password", help="PSQL Password", type=str, required=True)
+
+    args = parser.parse_args()
+    print(args.username)
+    print(args.password)
+
     # Download data
     data = download_data('BTC', 'USD', 'coinbase', 'day')
     df = convert_to_dataframe(data)
