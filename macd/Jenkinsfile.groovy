@@ -10,15 +10,15 @@ pipeline {
             }
     }
     stages {
-        stage('Username/Password') {
-            environment {
-                PSQL_CREDS = credentials("${psql_db_string}")
-            }
-            steps {
-                sh("echo Username is $PSQL_CREDS_USR")
-                sh("echo Password is $PSQL_CREDS_PSW")
-            }
-        }
+        // stage('Username/Password') {
+        //     environment {
+        //         PSQL_CREDS = credentials("${psql_db_string}")
+        //     }
+        //     steps {
+        //         sh("echo Username is $PSQL_CREDS_USR")
+        //         sh("echo Password is $PSQL_CREDS_PSW")
+        //     }
+        // }
         stage('Install..') {
             steps {
                 script {
@@ -30,6 +30,9 @@ pipeline {
             }
         }
         stage('RUN') {
+            environment {
+                PSQL_CREDS = credentials("${psql_db_string}")
+            }
             steps {
                 script {
                     sh("""python3 macd/runner.py -u ${env.PSQL_CREDS_USR} -p ${env.PSQL_CREDS_PSW}""")
