@@ -24,7 +24,6 @@ pipeline {
                 script {
                     sh("""ls -la
                     python --version
-                    pip install -r macd/requirements.txt
                     """)
                 }
             }
