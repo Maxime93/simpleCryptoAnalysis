@@ -10,7 +10,7 @@ pipeline {
             }
     }
     stages {
-        stage('Example Username/Password') {
+        stage('Username/Password') {
             environment {
                 PSQL_CREDS = credentials('psql-db')
             }
