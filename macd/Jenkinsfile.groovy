@@ -1,6 +1,6 @@
-// withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'psql-db', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-//     sh("""echo uname=$USERNAME pwd=$PASSWORD""")
-// }
+withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'psql-db', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+    sh("""echo uname=$USERNAME pwd=$PASSWORD""")
+}
 
 pipeline {
     agent {
