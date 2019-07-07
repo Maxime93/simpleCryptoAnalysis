@@ -1,4 +1,7 @@
 pipeline {
+    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'psql-db', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+        sh("""echo uname=$USERNAME pwd=$PASSWORD""")
+    }
     agent {
         docker {
             image 'jupyter/datascience-notebook'
@@ -18,9 +21,6 @@ pipeline {
             }
         }
         stage('RUN') {
-            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'psql-db', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-            sh("""echo uname=$USERNAME pwd=$PASSWORD""")
- }
             steps {
                 script {
                     sh("""python3 macd/runner.py""")
