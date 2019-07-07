@@ -10,6 +10,8 @@ pipeline {
             steps {
                 script {
                     sh("""ls -la
+                    apt-get update
+                    apt-get install python3-pip libssl-dev libffi-dev libsasl2-modules libsasl2-dev jq -y
                     python --version
                     pip install stockstats==0.2.0
                     pip install psycopg2==2.8.3
