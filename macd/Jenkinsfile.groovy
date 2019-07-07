@@ -1,8 +1,7 @@
-// node {
-//     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'psql-db', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-//         sh("""echo uname=$USERNAME pwd=$PASSWORD""")
-//     }
-// }
+withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'psql-db', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+    sh("""echo uname=$USERNAME pwd=$PASSWORD""")
+}
+
 pipeline {
     agent {
         docker {
@@ -10,10 +9,16 @@ pipeline {
             args '--user root:root'
             }
     }
-    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'psql-db', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-        sh("""echo uname=$USERNAME pwd=$PASSWORD""")
-    }
     stages {
+        stage('Example Username/Password') {
+            environment {
+                PSQL_CREDS = credentials('psql-db')
+            }
+            steps {
+                sh("echo Username is $PSQL_CREDS_USR")
+                sh("echo Password is $PSQL_CREDS_PSW")
+            }
+        }
         stage('Install..') {
             steps {
                 script {
