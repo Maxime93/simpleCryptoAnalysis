@@ -47,7 +47,7 @@ if __name__ == '__main__':
     parser.add_argument("-p", "--password", help="PSQL Password", type=str, required=True)
 
     args = parser.parse_args()
-    uname = args.username)
+    uname = args.username
     pwd = args.password
 
     # Download data
