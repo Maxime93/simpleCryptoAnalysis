@@ -18,9 +18,14 @@ pipeline {
             }
         }
         stage('RUN') {
+            environment {
+                CREDS = credentials("${psql-db}")
+            }
             steps {
                 script {
-                    sh("""python3 macd/runner.py""")
+                    sh("""echo ${env.CREDS_USR}
+                    echo ${env.CREDS_PSW}
+                    python3 macd/runner.py""")
                 }
             }
         }
