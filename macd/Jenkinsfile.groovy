@@ -12,6 +12,7 @@ pipeline {
                     sh("""ls -la
                     python --version
                     pip install stockstats==0.2.0
+                    pip install psycopg2==2.8.3
                     """)
                 }
             }
