@@ -31,7 +31,7 @@ pipeline {
         stage('RUN') {
             steps {
                 script {
-                    sh("""python3 macd/runner.py -u $PSQL_CREDS_USR -p $PSQL_CREDS_PSW""")
+                    sh("""python3 macd/runner.py -u ${env.PSQL_CREDS_USR} -p ${env.PSQL_CREDS_PSW}""")
                 }
             }
         }
