@@ -2,6 +2,7 @@ pipeline {
     agent {
         docker {
             image 'jupyter/datascience-notebook'
+            args '--user root:root'
             }
     }
     // agent any
