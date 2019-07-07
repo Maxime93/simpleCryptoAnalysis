@@ -3,6 +3,7 @@ import pandas as pd
 import datetime
 import argparse
 import stockstats
+from sqlalchemy import create_engine
 
 def get_filename(from_symbol, to_symbol, exchange, datetime_interval, download_date):
     return '%s_%s_%s_%s_%s.csv' % (from_symbol, to_symbol, exchange, datetime_interval, download_date)
@@ -35,6 +36,10 @@ def filter_empty_datapoints(df):
     df = df.drop(indices)
     return df
 
+def savePostgres(uname, pwd, host, port, db):
+    engine = create_engine('postgresql://{user}:{pwd}@{host}:{port}/{db}'.format(user=uname, pwd=pwd, host=host, port=port, db=db))
+    df.to_sql('macd', engine, if_exists='append', index=False)
+
 if __name__ == '__main__':
     # Arguments
     parser = argparse.ArgumentParser()
@@ -42,8 +47,8 @@ if __name__ == '__main__':
     parser.add_argument("-p", "--password", help="PSQL Password", type=str, required=True)
 
     args = parser.parse_args()
-    print(args.username)
-    print(args.password)
+    uname = args.username)
+    pwd = args.password
 
     # Download data
     data = download_data('BTC', 'USD', 'coinbase', 'day')
@@ -57,5 +62,12 @@ if __name__ == '__main__':
     # MACD
     df = stockstats.StockDataFrame.retype(df)
     df['macd'] = df.get('macd')
-
     print(df)
+
+    # Save DataFrame
+    host = '51.38.38.106'
+    db = 'crypto'
+    port = 5432
+    savePostgres(uname, pwd, host, port, db)
+
+    
