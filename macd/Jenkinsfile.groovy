@@ -9,17 +9,17 @@ pipeline {
         stage('Install..') {
             steps {
                 script {
-                    sh("""pip3 install -r macd/requirements.txt""")
+                    sh("""ls -la
+                    python --version
+                    pip install -r macd/requirements.txt
+                    """)
                 }
             }
         }
         stage('RUN') {
             steps {
                 script {
-                    sh("""ls -la
-                    python3 --version
-                    python --version
-                    python3 macd/runner.py""")
+                    sh("""python3 macd/runner.py""")
                 }
             }
         }
