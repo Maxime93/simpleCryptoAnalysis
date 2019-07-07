@@ -49,7 +49,6 @@ html5lib==1.0.1
 idna==2.8
 imageio==2.5.0
 imagesize==1.1.0
-importlib-metadata==0.0.0
 int-date==0.1.8
 ipykernel==5.1.0
 ipython==7.4.0
