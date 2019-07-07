@@ -25,8 +25,6 @@ pipeline {
                     sh("""ls -la
                     python --version
                     pip install -r macd/requirements.txt
-                    echo env.USERNAME
-                    echo env.PASSWORD
                     """)
                 }
             }
@@ -34,7 +32,7 @@ pipeline {
         stage('RUN') {
             steps {
                 script {
-                    sh("""python3 macd/runner.py -u hello -p hello""")
+                    sh("""python3 macd/runner.py -u $PSQL_CREDS_USR -p $PSQL_CREDS_PSW""")
                 }
             }
         }
